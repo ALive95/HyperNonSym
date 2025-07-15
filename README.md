@@ -1,16 +1,24 @@
 # Building Lyapunov Functionals Algorithmically
 
 Consider the hyperbolic partial differential equation (PDE)
-![](images/PDEmain.png)
+
+<p align="center">
+  <img src="PDEmain.png" alt="" style="width: 240px; display: block; margin: auto;">
+</p>
+
 This program attempts to build a Lyapunov functional for the above equation, showing that the energy of the
 solution decays as time goes to infinity. The algorithm is described in detail in the paper
 "Large-time asymptotics for hyperbolic systems with non-symmetric relaxation: An algorithmic approach"
 by Timothée Crin-Barat, Lorenzo Liverani (myself), Ling-Yun Shou and Enrique Zuazua.
 
 The general idea is to first decompose the matrix B into a skew-symmetric (Ba) and symmetric part (Bs):
-![](images/Bdecomp.png)
+<p align="center">
+  <img src="Bdecomp.png" alt="" style="width: 340px; display: block; margin: auto;">
+</p>
 Then, one obtains the equation
-![](images/PDEmod.png)
+<p align="center">
+  <img src="PDEmod.png" alt="" style="width: 240px; display: block; margin: auto;">
+</p>
 
 At this point, one build the functional by iteratively summing together suitable scalar products of the form
 ⟨X^{k-1} U, X^{k-1} A U⟩ or ⟨X^{k-1} U, X^{k-1} Ba U⟩,
@@ -22,7 +30,7 @@ the original paper.
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{CRINBARAT2025103757,
+@article{HypNonSym,
 title = {Large-time asymptotics for hyperbolic systems with non-symmetric relaxation: An algorithmic approach},
 journal = {Journal de Mathématiques Pures et Appliquées},
 volume = {202},
