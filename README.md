@@ -50,6 +50,13 @@ author = {Timothée Crin-Barat and Lorenzo Liverani and Ling-Yun Shou and Enriqu
 - Output the LaTeX code to visualize clearly the functional (just copy-paste it into a LaTeX compiler)
 - Several presets are available, including all of the examples in the original paper (Section 9).
 
+## Missing Features
+
+- The code currently generates only the functional for the decay in high frequencies (Section 5 of the paper). The functional for low frequencies will be added soon
+- Each term of the functional has to be multiplied for a suitably small ε>0. This is not yet implemented
+- A final predicted decay rate for the system will be added soon to the output, as well as a numerical check to see if the algorithm is optimal
+- Some small additional features such as: checking the Inhomogeneous Kalman Rank condition, developing the whole algorithm for the mixed case, the Sugimoto system among the presets...
+
 ## Usage
 
 ```bash
