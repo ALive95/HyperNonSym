@@ -1,0 +1,135 @@
+
+Matrix A:
+[0, -1, 0, 0]
+[-1, 0, 0, 0]
+[0, 0, 0, a]
+[0, 0, a, 0]
+
+Matrix Bs (Symmetric Part):
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+[0, 0, 0, b]
+
+Matrix Ba (Antisymmetric Part):
+[0, 0, 0, -1]
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+[1, 0, 0, 0]
+Matrix dimensions: 4 x 4
+Computed column rank: 1
+
+============================================================
+BINARY TREE EXPLORATION
+============================================================
+Initial rank: 1
+Target rank: 4
+
+========================================
+ITERATION 1
+========================================
+
+Processing leaf: Bs
+Current M rank: 1
+Rank of [M; X*A]: 2
+Rank of [M; X*A] (2) > r (1)
+Rank of [M; X*A; X*Ba]: 3
+Rank of [M; X*A; X*Ba] (3) > rank of [M; X*A] (2)
+Rank condition result for Bs: 0
+Added children: Bs A, Bs Ba
+Matrix dimensions: 12 x 4
+Computed column rank: 3
+
+Updated M with new leaves. New rank: 3
+
+========================================
+ITERATION 2
+========================================
+
+Processing leaf: Bs A
+Current M rank: 3
+Rank of [M; X*A]: 3
+Rank of [M; X*A] (3) == r (3)
+Rank of [M; X*Ba]: 3
+Rank of [M; X*Ba] (3) == r (3)
+Rank condition result for Bs A: None
+No children added for Bs A
+
+Processing leaf: Bs Ba
+Current M rank: 3
+Rank of [M; X*A]: 4
+Rank of [M; X*A] (4) > r (3)
+Rank of [M; X*A; X*Ba]: 4
+Rank of [M; X*A; X*Ba] (4) == rank of [M; X*A] (4)
+Rank condition result for Bs Ba: 1
+Added child: Bs Ba A
+Matrix dimensions: 16 x 4
+Computed column rank: 4
+
+Updated M with new leaves. New rank: 4
+
+Target rank 4 reached!
+
+============================================================
+FINAL TREE STRUCTURE
+============================================================
+└── Bs
+    ├── Bs A
+    └── Bs Ba
+        └── Bs Ba A
+
+Final rank achieved: 4
+Target rank: 4
+Exploration completed successfully
+
+============================================================
+BUILDING LYAPUNOV FUNCTIONAL
+============================================================
+
+Building Lyapunov functional...
+Initial term: (1/2)||U||^2
+
+Processing node Bs A, node number 0, Direction of parent 0
+Added mixed A terms: (1/ξ^2) [⟨Bs U, Bs A ∂_x U⟩ + m⟨Bs A U, Bs Ba A U⟩]
+Term: (a*b**2*dx*u_3*u_4 - 2*a*b**2*m*u_2*u_3)/xi**2
+
+Processing node Bs Ba, node number 0, Direction of parent 0
+Added mixed Ba terms: (1/ξ^2) [⟨Bs U, Bs Ba U⟩ + m⟨Bs A U, Bs Ba A U⟩]
+Term: (-2*a*b**2*m*u_2*u_3 + b**2*u_1*u_4)/xi**2
+
+  Processing node Bs Ba A, node number 1, Direction of parent 1
+  Added term: (1/ξ^4) ⟨Bs Ba U, Bs Ba A ∂_x U⟩
+  Term: -b**2*dx*u_1*u_2/xi**4
+
+Final Lyapunov functional (use this to check the LaTeX one):
+ -b**2*dx*u_1*u_2/xi**4 + u_1**2/2 + u_2**2/2 + u_3**2/2 + u_4**2/2 + (a*b**2*dx*u_3*u_4 - 2*a*b**2*m*u_2*u_3)/xi**2 + (-2*a*b**2*m*u_2*u_3 + b**2*u_1*u_4)/xi**2
+
+============================================================
+LATEX OUTPUT
+============================================================
+
+==============================
+Cancellation Analysis Summary
+==============================
+
+--- Node at level 1, name Bs A ---
+Computed m = 1
+Cancellation status: underdetermined
+Cancellation parameters: [a, b]; Expression: b**2*u_2*u_4*(a**2 - 1)
+Underdetermined system. Possible constraints: [(-1, b), (1, b)]
+
+--- Node at level 1, name Bs Ba ---
+Computed m = 1
+Cancellation status: underdetermined
+Cancellation parameters: [a, b]; Expression: b**2*u_2*u_4*(a**2 - 1)
+Underdetermined system. Possible constraints: [(-1, b), (1, b)]
+
+==============================
+
+\begin{align*}
+\mathcal{L} &= \frac{1}{2}\|\mathbf{u}\|^2 \\
+&\quad+ \frac{1}{\xi^{2}}\left(a b^{2}\langle u_{4}, \partial_x u_{3} \rangle\right) \\
+&\quad+ \frac{1}{\xi^{2}}\left(- a b^{2}\langle u_{3}, u_{2} \rangle\right) \\
+&\quad+ \frac{1}{\xi^{2}}\left(b^{2}\langle u_{4}, \partial_x u_{1} \rangle\right) \\
+&\quad+ \frac{1}{\xi^{2}}\left(- a b^{2}\langle u_{3}, u_{2} \rangle\right) \\
+&\quad+ \frac{1}{\xi^{4}}\left(- b^{2}\langle u_{1}, \partial_x u_{2} \rangle\right)\end{align*}
